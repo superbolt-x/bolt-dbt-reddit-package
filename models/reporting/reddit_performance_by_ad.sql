@@ -32,7 +32,7 @@ WITH
     {%- endfor %}
 
     ads AS 
-    (SELECT account_id, ad_id::varchar as ad_id, ad_name, ad_effective_status, ad_group_id, campaign_id
+    (SELECT account_id, ad_id::varchar as ad_id, ad_name, ad_effective_status, ad_group_id
     FROM {{ ref('reddit_ads') }}
     ),
 
@@ -47,7 +47,7 @@ WITH
     ),
 
     accounts AS 
-    (SELECT account_id, account_name, account_name, account_currency
+    (SELECT account_id, account_name, account_currency
     FROM {{ ref('reddit_accounts') }} 
     )
 
