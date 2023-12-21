@@ -10,17 +10,17 @@ SELECT
     {%- set alias = conversion_alias_config(action_type) -%}
     {%- if alias|length %}
         {%- if alias in ("search","add_to_cart","view_content","page_visit","lead","add_to_wishlist","sign_up") %}
-            COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{alias}}"
+            COALESCE(SUM(CASE WHEN event_name = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{alias}}"
         {%- else %}
-            COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{alias}}",
-            COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{alias}}_value"
+            COALESCE(SUM(CASE WHEN event_name = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{alias}}",
+            COALESCE(SUM(CASE WHEN event_name = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{alias}}_value"
         {%- endif -%}
     {%- else -%}
         {%- if action_type in ("search","add_to_cart","view_content","page_visit","lead","add_to_wishlist","sign_up") %}
-            COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{action_type}}"
+            COALESCE(SUM(CASE WHEN event_name = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{action_type}}"
         {%- else %}
-            COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{action_type}}",
-            COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{action_type}}_value"
+            COALESCE(SUM(CASE WHEN event_name = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{action_type}}",
+            COALESCE(SUM(CASE WHEN event_name = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{action_type}}_value"
         {%- endif -%}
     {%- endif -%}
     {%- if not loop.last %},{% endif -%}
