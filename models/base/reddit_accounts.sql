@@ -21,4 +21,3 @@ WITH staging AS
 SELECT *,
     account_id as unique_key
 FROM staging 
-WHERE _fivetran_synced = last_updated_time
