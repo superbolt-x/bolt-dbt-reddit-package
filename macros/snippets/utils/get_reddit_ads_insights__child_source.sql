@@ -1,7 +1,7 @@
 {%- macro get_reddit_ads_insights__child_source(table_name) -%}
 
 
-{%- set action_types = dbt_utils.get_column_values(source('reddit_raw','ad_conversions'),'event_name') -%}
+{%- set action_types = dbt_utils.get_column_values(source('reddit_raw','ad_conversions_report'),'event_name') -%}
 
 SELECT 
     date,
@@ -19,7 +19,7 @@ SELECT
 
 {% endfor %}
 
-    FROM {{ source('reddit_raw','ad_conversions') }}
+    FROM {{ source('reddit_raw','ad_conversions_report') }}
 
     GROUP BY 1,2
 
