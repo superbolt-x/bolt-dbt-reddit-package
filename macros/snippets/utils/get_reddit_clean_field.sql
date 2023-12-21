@@ -1,11 +1,4 @@
 {%- macro get_reddit_clean_field(table_name, column_name) %}
-    {%- set reject_fields = [
-    "id",
-    "business_id",
-    "name",
-    "currency",
-    "_fivetran_synced"
-    ] -%}
 
     {%- if column_name == 'id' -%}
         {{column_name}}::varchar as {{table_name|trim('s')}}_{{column_name}}
