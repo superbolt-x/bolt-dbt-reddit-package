@@ -17,10 +17,10 @@ WITH staging AS
     
         {% for field in selected_fields -%}
         {{ get_reddit_clean_field(table_name, field) }}
-        {%- if not loop.last %},{% endif -%} 
+        {%- if not loop.last %},{% endif -%}
         {% endfor -%}
 
-     FROM {{ source(schema_name, table_name) }}
+    FROM {{ source(schema_name, table_name) }}
     )
 
 SELECT *,
