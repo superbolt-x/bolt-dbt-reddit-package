@@ -2,8 +2,7 @@
 
 {%- set config = (
     
-    {"original_name": 'lead', "alias": 'leads'},
-    {"original_name": 'purchase', "alias": 'purchases'}
+    {"original_name": 'lead', "alias": 'leads'}
 
     )-%}
 
