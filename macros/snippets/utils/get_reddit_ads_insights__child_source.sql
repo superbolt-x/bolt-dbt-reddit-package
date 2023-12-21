@@ -12,20 +12,17 @@ SELECT
     {%- if alias|length %}
         {%- if alias in reject_list %}
             COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{alias}}"
-            {%- if not loop.last %},{% endif %}
         {%- else %}
             COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{alias}}",
             COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{alias}}_value"
-            {%- if not loop.last %},{% endif %}
     {%- else -%}
         {%- if action_type in reject_list %}
             COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{action_type}}"
-            {%- if not loop.last %},{% endif -%}
         {%- else %}
             COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{action_type}}",
             COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{action_type}}_value"
-            {%- if not loop.last %},{% endif -%}
     {%- endif -%}
+    {%- if not loop.last %},{% endif -%}
     {% endfor %}
 
     FROM {{ source('reddit_raw','ad_conversions_report') }}
