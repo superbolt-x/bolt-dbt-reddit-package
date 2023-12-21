@@ -13,9 +13,9 @@ WITH staging AS
     (SELECT
     
         {% for field in selected_fields -%}
-        {{ get_reddit_clean_field(table_name, field) }}
-        {%- if not loop.last %},{% endif -%}
+        {{ get_reddit_clean_field(table_name, field) }},
         {% endfor -%}
+        MAX(_fivetran_synced) OVER (PARTITION BY id) as last_updated_time
 
     FROM {{ source(schema_name, table_name) }}
     )
