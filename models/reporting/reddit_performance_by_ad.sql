@@ -5,7 +5,7 @@
 
 {%- set date_granularity_list = ['day','week','month','quarter','year'] -%}
 {%- set exclude_fields = ['date','day','week','month','quarter','year','unique_key'] -%}
-{%- set dimensions = ['account_id','campaign_id','adset_id','ad_id'] -%}
+{%- set dimensions = ['account_id','ad_id'] -%}
 {%- set measures = adapter.get_columns_in_relation(ref('reddit_ads_insights'))
                     |map(attribute="name")
                     |reject("in",exclude_fields)
