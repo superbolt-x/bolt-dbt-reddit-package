@@ -26,9 +26,7 @@ SELECT
             COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{action_type}}_value"
             {%- if not loop.last %},{% endif -%}
     {%- endif -%}
-    {%- if not loop.last %},{%- endif %}
-
-{% endfor %}
+    {% endfor %}
 
     FROM {{ source('reddit_raw','ad_conversions_report') }}
 
