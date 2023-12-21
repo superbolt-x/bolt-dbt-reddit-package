@@ -47,7 +47,7 @@ WITH
     ),
 
     accounts AS 
-    (SELECT account_id, account_name, account_currency
+    (SELECT account_id, account_name, currency
     FROM {{ ref('reddit_accounts') }} 
     )
 
