@@ -1,6 +1,5 @@
 {%- set currency_fields = [
-    "spend",
-    "purchase_value"
+    "spend"
 ]
 -%}
 
@@ -28,7 +27,7 @@ WITH
     
     insights AS 
     (SELECT 
-        {%- for field in stg_fields if (("_1_d_view" not in field and "_7_d_click" not in field) or ("purchases" in field or "purchase_value" in field)) -%}
+        {%- for field in stg_fields -%}
         {%- if field in currency_fields or '_value' in field %}
         "{{ field }}"::float/{{ exchange_rate }} as "{{ field }}"
         {%- else %}
