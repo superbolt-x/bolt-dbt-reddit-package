@@ -9,10 +9,12 @@ SELECT
     {% for action_type in action_types -%}
     {%- set alias = conversion_alias_config(action_type) -%}
     {%- if alias|length %}
-        COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as {{alias}}
+        COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{alias}}",
+        COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{alias}}_value"
         {%- if not loop.last %},{% endif %}
     {%- else -%}
-        COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN value ELSE 0 END), 0) as "{{action_type}}"
+        COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_items ELSE 0 END), 0) as "{{action_type}}",
+        COALESCE(SUM(CASE WHEN action_type = '{{action_type}}' THEN total_value ELSE 0 END), 0) as "{{action_type}}_value"
         {%- if not loop.last %},{% endif -%}
     {%- endif -%}
     {%- if not loop.last %},{%- endif %}
