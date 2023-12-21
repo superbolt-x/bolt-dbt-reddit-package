@@ -1,0 +1,59 @@
+version: 2
+
+sources:
+  - name: reddit_raw
+    schema: reddit_raw
+    tables:
+      - name: ads
+        identifier: ad
+        columns: 
+          - name: id
+
+      - name: ad_report
+        identifier: ad_report
+      
+        freshness: 
+          warn_after: {count: 24, period: hour}
+
+        loaded_at_field: _fivetran_synced
+        
+      - name: ad_conversions_report
+        identifier: ad_conversions_report
+      - name: ad_groups
+        identifier: ad_group          
+      - name: campaigns
+        identifier: campaign
+      - name: accounts
+        identifier: business_account
+
+models:
+  - name: reddit_ads
+    columns:
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: reddit_ad_groups
+    columns:
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: reddit_campaigns
+    columns:
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: reddit_accounts
+    columns:
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
+  - name: reddit_ads_insights 
+    columns:
+      - name: unique_key
+        tests: 
+          - unique
+          - not_null
