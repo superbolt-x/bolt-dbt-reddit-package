@@ -7,7 +7,7 @@
     "campaign_id",
     "click_url"
 ] -%}
-{%- set schema_name, table_name = 'reddit_raw', 'ad' -%}
+{%- set schema_name, table_name = 'reddit_raw', 'ads' -%}
 
 WITH staging AS 
     (SELECT
