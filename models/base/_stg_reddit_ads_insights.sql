@@ -17,7 +17,7 @@ with insights_source as (
         {{ get_reddit_clean_field(table_name, field) }}
         {%- if not loop.last %},{%- endif %}
         {%- endfor %}
-    FROM {{ source(schema_name, table_name) }} }}
+    FROM {{ source(schema_name, table_name) }}
 
     ),
 
