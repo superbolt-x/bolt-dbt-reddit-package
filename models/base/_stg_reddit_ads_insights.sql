@@ -6,10 +6,18 @@
 
 {%- set schema_name, table_name = 'reddit_raw', 'ad_report' -%}
 
+{%- set insights_fields = adapter.get_columns_in_relation(source(schema_name, table_name))
+                    |map(attribute="name")
+                    -%}  
+
 with insights_source as (
 
-    SELECT * 
-    FROM {{ source(schema_name, table_name) }}
+    SELECT 
+        {%- for field in insights_fields %}
+        {{ get_reddit_clean_field(table_name, field) }}
+        {%- if not loop.last %},{%- endif %}
+        {%- endfor %}
+    FROM {{ source(schema_name, table_name) }} }}
 
     ),
 
