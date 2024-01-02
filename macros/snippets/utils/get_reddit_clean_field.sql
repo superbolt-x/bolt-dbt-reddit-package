@@ -6,6 +6,9 @@
     {%- elif column_name in ("name","configured_status","effective_status","is_processing") -%}
         {{column_name}} as {{table_name|trim('s')}}_{{column_name}} 
 
+    {%- elif column_name == 'spend' -%}
+        {{column_name}}::float/1000000 as spend
+
     {%- else -%}
         {{column_name}} 
     {%- endif -%}
